@@ -25,7 +25,7 @@
     <div class="main">
         <div class="header header--mini" id = 'header' >
             <div class = "account">
-                <div class="header-card header-card-test" id="card">
+                <div class="header-card header-card--hide" id="card">
                     <div class="header-card-front">
                         <div class="header-card__picture">
                             <img src="https://image.flaticon.com/icons/png/512/23/23716.png">
@@ -79,32 +79,17 @@
                     <hr>
                 </div>
 
-                <div class="main-content__books_section most-searched__books">
-                    <div class="books">
-                        <button onclick="issueBook('#123')">Issue</button>
-                    </div>
-                    <div class="books">
-                        <img style="height: 100%;width: 100%;" src="https://about.canva.com/wp-content/uploads/sites/3/2015/01/art_bookcover.png">
-                        <button onclick="issueBook('#123')" class="raised-button shk-button">Issue</button>
-                    </div>
-                    <div class="books"></div>
-                    <div class="books"></div>
-                    <div class="books"></div>
-                    <button class="shk-button raised-button">more..</button>
+                <div class="main-content__books_section" id="most-searched__books">
+                    <button class="shk-button raised-button more_books_button">more..</button>
                 </div>
             </div>
-            <div class="main-content__section most-searched">
+            <div class="main-content__section">
                 <div class ="most-searched-header">
-                    <h1 class="main-content__header">Most Popular</h1>
+                    <h1 class="main-content__header">Newest Books</h1>
                     <hr>
                 </div>
-                <div class="main-content__books_section ">
-                    <div class="books"></div>
-                    <div class="books"></div>
-                    <div class="books"></div>
-                    <div class="books"></div>
-                    <div class="books"></div>
-                    <button class="shk-button raised-button">more..</button>
+                <div class="main-content__books_section" id="newestBooks">
+                    <button class="shk-button raised-button more_books_button">more..</button>
                 </div>
 
             </div>

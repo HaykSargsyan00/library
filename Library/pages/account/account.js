@@ -35,13 +35,33 @@ function createPageStaticComponents() {
     for(let item of userIDElements){
         item.innerText = thisUser.ID;
     }
+
+    let mostSearchedSection = document.getElementById('most-searched__books');
+    let mostSearchedBooks = window.lms.bookManagementService.getTopBooks();
+    for(let book of mostSearchedBooks){
+        let books = `<div class="book">
+                        <img style="height: 100%;width: 100%;" src="${book.url}">
+                        <button onclick="issueBook(' ${book.ID} ')" class="raised-button shk-button">Issue</button>
+                    </div>`;
+        mostSearchedSection.insertAdjacentHTML( 'afterbegin' ,books );
+    }
+
+    let newestBooksSection = document.getElementById('newestBooks');
+    let newestBooks = window.lms.bookManagementService.getNewBooks();
+    for(let book of newestBooks){
+        let books = `<div class="book">
+                        <img style="height: 100%;width: 100%;" src="${book.url}">
+                        <button onclick="issueBook( ${book.ID} )" class="raised-button shk-button">Issue</button>
+                    </div>`;
+        newestBooksSection.insertAdjacentHTML( 'afterbegin' ,books );
+    }
 }
 
 function switchAccountVisibility() {
     isAccountHidden = !isAccountHidden;
     if(isAccountHidden) {
         header.classList.add('header--mini');
-        card.classList.add('header-card-test');
+        card.classList.add('header-card--hide');
         headerMiniCard.classList.add('header-mini_card--show');
         logoutButton.classList.add('logout_button--show');
 
@@ -49,7 +69,7 @@ function switchAccountVisibility() {
         accountHideButton.classList.remove('account_hide_button--show');
     } else {
         header.classList.remove('header--mini');
-        card.classList.remove('header-card-test');
+        card.classList.remove('header-card--hide');
         headerMiniCard.classList.remove('header-mini_card--show');
         logoutButton.classList.remove('logout_button--show');
 

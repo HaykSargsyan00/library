@@ -2,12 +2,15 @@ let main;
 let card;
 let form;
 let cardIsRotated = false;
+let formName = null;
 
 window.onload = function(){
     window.lms = new LMS();
     card = document.getElementById('card');
     form = document.getElementById('form');
     main = document.getElementById('main');
+
+    form.addEventListener('keypress',submit);
 
 }
 
@@ -21,9 +24,11 @@ function rotate (event){
     cardIsRotated = !cardIsRotated;
     if(cardIsRotated) {
         card.classList.add('card--rotate');
+        form.addEventListener('keypress',submit);
     } else {
         card.classList.remove('card--rotate');
         form.innerHTML = '';
+        form.removeEventListener('keypress',submit);
     }
 }
 
@@ -54,27 +59,65 @@ window.addFormItems = function addFormItems(eventElement) {
 
     if(eventElement === 'login'){
         form.insertAdjacentHTML( 'afterbegin' ,login );
-    } else if(eventElement == 'sign up'){
+        formName = 'login';
+    } else if(eventElement === 'sign up'){
         form.insertAdjacentHTML( 'afterbegin' ,signUp );
+        formName = 'signUp';
     }
 }
 
 
+function submit(event){
+    if( event.key === 'Enter'){
+        switch (formName) {
+            case 'login':
+                login();
+                break;
+            case 'signUp':
+                signUp();
+                break;
+            default:
+                console.log(event);
+                return;
+        }
+    }
+}
 
 function login() {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
+    let incorrect = false;
+
+    if( username === '')
+    {
+        document.getElementById('username').classList.add('incorrect-input');
+        incorrect = true;
+    }
+    if(password === '')
+    {
+        document.getElementById('password').classList.add('incorrect-input');
+        incorrect = true;
+    }
+
+    if(incorrect){
+        return;
+    }
 
     try {
         let info = window.lms.authService.login(username, password);
         window.location = '../account/account.html';
     } catch (e) {
         console.log(e);
-        document.getElementById('error-message').innerText = '! Wrong password.\nTry again or click\nForgot password to reset it.';
+        document.getElementById('username').classList.add('incorrect-input');
+        document.getElementById('password').classList.add('incorrect-input');
     }
 }
 
 function signUp() {
+    document.getElementById('password').classList.remove('incorrect-input');
+    document.getElementById('username').classList.remove('incorrect-input');
+    document.getElementById('email').classList.remove('incorrect-input');
+
     let newUser = {};
     //newUser.name = document.getElementById('name').value;
     //newUser.surname = document.getElementById('surname').value;
@@ -83,16 +126,36 @@ function signUp() {
     //newUser.phoneNumber = document.getElementById('phoneNumber').value;
     newUser.username = document.getElementById('username').value;
     newUser.password = document.getElementById('password').value;
-    if(newUser.email == '' || newUser.password == '' || newUser.username == '')
+
+    let incorrect = false;
+    if( newUser.email.match(/[^0-9,_,\-,@,.,a-z,A-z]/g) != null || newUser.email === '' || newUser.email.indexOf('@')=== -1)
     {
+        document.getElementById('email').classList.add('incorrect-input');
+        incorrect = true;
+    }
+    if( newUser.username.match(/[^0-9,_,\-,a-z,A-z]/g) != null || newUser.username === '')
+    {
+        document.getElementById('username').classList.add('incorrect-input');
+        incorrect = true;
+    }
+    if(newUser.password === '')
+    {
+        document.getElementById('password').classList.add('incorrect-input');
+        incorrect = true;
+    }
+
+    if(incorrect){
         return;
     }
+
     try{
         window.lms.authService.umService.addUser(newUser);
         window.location = '../account/account.html';
     }catch (e) {
         if(e instanceof UserAlreadyExists){
-            console.log('Error: ' + e);
+            document.getElementById('username').classList.add('incorrect-input');
+            document.getElementById('username').value = '';
+            document.getElementById('username').placeholder ='username is taken!';
         }
     }
 

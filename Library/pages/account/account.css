@@ -1,4 +1,4 @@
-.raised-button{
+.shk-button{
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
     color: rgba(0, 0, 0, 0.87);
     background-color: white;
@@ -27,29 +27,25 @@
     padding: 0 16px;
     border-radius: 13px;
     overflow: visible;
-    transform: translate3d(0,0,0);
-}
-.raised-button.hover{
-    cursor: pointer;
-}
-input:hover{
-    cursor: pointer;
-}
+    transform: translate3d(0,0,0) scale(1);
 
-.shk-button{
-    margin-bottom: 10px;
     width: 60%;
     background-color: rgba(0,0,0,.3);
     color: #1DACFB;
     transition: transform .2s linear;
-    transform: scale(1);
-    cursor: pointer;
 }
 .shk-button:hover{
     transform: scale(1.05);
     transform-origin: center;
     box-shadow: 0 0 10px #1DACFB;
 }
+
+input:hover{
+    cursor: pointer;
+}
+
+
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -99,8 +95,9 @@ input:hover{
     transition: opacity .3s linear;
 }
 
-.header-card-test{
+.header-card--hide{
     opacity: 0;
+    cursor: context-menu;
 }
 
 .header-card-front,.header-card-back{
@@ -233,10 +230,12 @@ input:hover{
     width: 50px;
     height: 50px;
     border-radius: 25px;
+    cursor: context-menu;
 }
 
 .account_hide_button--show{
     opacity: 1 !important;
+    cursor: pointer;
 }
 
 
@@ -275,32 +274,35 @@ input:hover{
 .main-content__books_section{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     padding: 30px 20px;
     position: relative;
     margin-bottom: 60px;
 }
 /*----------------uxxel---------------*/
-.main-content__books_section>button{
+.more_books_button{
     position: absolute;
     right: 20px;
     bottom: -60px;
     width: 80px;
-    background-color: #821CCB;
+    background: linear-gradient(45deg,#2497EA 20%,#821CCB 100%);;
+    color: white;
 }
-.books{
-    width: 200px;
+.book{
+    width: 180px;
     height: 250px;
     box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
     transform: scale(1);
     transition: transform .3s linear;
     position: relative;
+    margin: 10px;
 }
 
-.books:hover{
+.book:hover{
     transform: scale(1.1);
     cursor: pointer;
 }
-.books>button{
+.book>button{
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -308,6 +310,7 @@ input:hover{
     transition: opacity .3s linear;
     width: 40px;
 }
-.books:hover>button{
+.book:hover>button{
     opacity: 1;
 }
+

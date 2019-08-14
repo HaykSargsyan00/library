@@ -37,6 +37,10 @@ input:hover{
     cursor: pointer;
 }
 
+.incorrect-input{
+    box-shadow: 0 0 20px #f00;
+}
+
 .shk-input{
     padding: 10px;
     border-radius: 7px;
