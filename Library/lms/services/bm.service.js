@@ -3,7 +3,6 @@ class BmService{
         this.storage = new StorageMService(window.localStorage, 'Books');
         this.books = this.storage.getFromStorage();
     }
-
     getBooksByName(bookName){
         let booksWithThisName = [];
         for(let book of this.books){
