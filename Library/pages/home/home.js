@@ -1,6 +1,4 @@
-let miniHeader = true;
-let buttonHidden = true;
-let headerItem = null;
+let main;
 let card;
 let form;
 let cardIsRotated = false;
@@ -9,14 +7,23 @@ window.onload = function(){
     window.lms = new LMS();
     card = document.getElementById('card');
     form = document.getElementById('form');
+    main = document.getElementById('main');
+
 }
 
-function rotate (){
+function rotate (event){
+    if(event)
+    {
+        if(event.target != main || !cardIsRotated){
+            return;
+        }
+    }
     cardIsRotated = !cardIsRotated;
     if(cardIsRotated) {
         card.classList.add('card--rotate');
     } else {
         card.classList.remove('card--rotate');
+        form.innerHTML = '';
     }
 }
 
@@ -52,19 +59,6 @@ window.addFormItems = function addFormItems(eventElement) {
     }
 }
 
-
-
-function header(header) {
-        miniHeader = !miniHeader;
-        if (buttonHidden) {
-            setTimeout(() => { buttonHidden = false; }, 500);
-        } else {
-            buttonHidden = true;
-        }
-        if(miniHeader) {
-            header.classList.add('header--mini');
-        }
-}
 
 
 function login() {
