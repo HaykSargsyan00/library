@@ -3,6 +3,17 @@ class BmService{
         this.storage = new StorageMService(window.localStorage, 'Books');
         this.books = this.storage.getFromStorage();
     }
+    getBooksById(bookId){
+        for(let book of this.books){
+            if(book.bookId === bookId){
+                return book;
+            }
+        }
+
+        throw new Error('There are no book whit such name');
+
+    }
+
     getBooksByName(bookName){
         let booksWithThisName = [];
         for(let book of this.books){
@@ -10,7 +21,7 @@ class BmService{
                 booksWithThisName.push(book);
             }
         }
-        if(booksWithThisName.length == 0){
+        if(booksWithThisName.length === 0){
             throw new Error('There are no book whit such name');
         }
 
