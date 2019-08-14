@@ -1,6 +1,7 @@
 class UmService {
     constructor(){
         this.Storage = new StorageMService(window.localStorage, 'Users');
+        this.sessionStorage = new StorageMService(window.sessionStorage, 'authInfo');
     }
 
     addUser(NewUser) {
@@ -8,6 +9,10 @@ class UmService {
             NewUser.password = EncryptionHelper.encrypt(NewUser.password);
             let user = new Human(NewUser);
             this.Storage.addIntoStorage(user);
+            this.sessionStorage.setIntoStorage({
+                user: user,
+                permissions: 'permission'
+            });
         }
          else {
             throw new UserAlreadyExists("Sorry there are user with such username");

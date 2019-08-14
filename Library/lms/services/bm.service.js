@@ -17,14 +17,6 @@ class BmService{
 
         return booksWithThisName;
     }
-    getBookById(bookId){
-        for(let book of this.books){
-            if(book.ID === bookId){
-                return book;
-            }
-        }
-        throw new Error('There are no book whit such name');
-    }
 
     addBook(newBook){
         for(let book of this.books){

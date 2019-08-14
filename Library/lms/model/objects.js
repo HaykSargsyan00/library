@@ -8,6 +8,11 @@ class Human{
         this.status = status;
         this.username = username;
         this.password = password;
+
+        let id = window.localStorage.getItem('UserLastId');
+        id++;
+        this.ID = '#' + id;
+        window.localStorage.setItem('UserLastId',id);
     }
 }
 
