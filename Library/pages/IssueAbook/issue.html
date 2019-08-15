@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<!--Making a change -->
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
     <link rel="stylesheet" href="issueStyles.css">
+
     <script src="../../Exceptions/Exceptions.js"></script>
     <script src="../../lms/services/um.service.js"></script>
     <script src="../../lms/services/permission.service.js"></script>
@@ -11,26 +13,38 @@
     <script src="../../lms/services/store.service.js"></script>
     <script src="../../lms/services/bm.service.js"></script>
     <script src="../../lms/encryption.helper.js"></script>
-    <script src="../../lms/model/objects.js"></script>
+    <script src="../../lms/model/issue.js"></script>
     <script src="../../lms/lms.js"></script>
     <script src="issue.controller.js"></script>
-    <meta charset="UTF-8">
-    <title>LMS</title>
+    <script src="../../lms/model/book.js"></script>
 </head>
 <body>
-<div class="container">
-    <div class="issueCard">
-        <img class="bookImg" src="defaultBookPic.jpg">
-        Reserve the book SOME BOOK
-        <form action="javascript:void(0)" class="datesForm" onsubmit="reserveBook()">
-            <label for="fromDate"> From Date </label>
-                <input type="date" id="fromDate" required>
+<div class="main" id="main" onclick="rotate(event)">
+    <div class = "account">
+        <div class="card" id="card">
+            <div class="card__front">
 
-            <label for="toDate"  > To Date </label>
-                <input type="date" id="toDate" required>
-            <input type="submit" ">
-        </form>
+                <div id = cardPic>
+
+                </div>
+
+
+            </div>
+            <div class="card__back">
+
+                <form action="javascript:void(0)" class="datesForm" onsubmit=" reserveBook();rotate()">
+
+                    <label for="fromDate" class="card__form__list"> From Date
+                        <input type="date" id="fromDate" required class='shk-input'></label>
+
+                    <label for="toDate" class="card__form__list" > To Date
+                        <input type="date" id="toDate" required class='shk-input'></label>
+                    <input type="submit"  class="raised-button submit">
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+
 </body>
 </html>

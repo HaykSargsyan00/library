@@ -1,9 +1,12 @@
 class BookIssue{
-    constructor(user,book,fromDate = new Date(),toDate){
+    constructor(bookId,user,fromDate = new Date(),toDate){
         this.username = user.username;
-        this.bookId = book.bookId;
+        this.bookId = bookId;
         this.fromDate = fromDate;
         this.toDate = toDate;
-        this.Id = 5;
+        let id = window.localStorage.getItem('IssueLastId');
+        id++;
+        this.ID = '#' + id;
+        window.localStorage.setItem('IssueLastId',id);
     }
 }

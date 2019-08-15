@@ -94,9 +94,10 @@ class BmService{
         this.storage.setIntoStorage(addBooksForNewPc());
         this.books = this.storage.getFromStorage();
     }
-    getBooksById(bookId){
+    getBookById(bookId){
+
         for(let book of this.books){
-            if(book.bookId === bookId){
+            if(book.ID === bookId){
                 return book;
             }
         }
@@ -162,7 +163,7 @@ class BmService{
     }
 
     updateAvailability(book){
-        if(book.isAvailable  === false)
+        if(!book.isAvailable)
             book.isAvailable = true;
         else
             book.isAvailable = false;
