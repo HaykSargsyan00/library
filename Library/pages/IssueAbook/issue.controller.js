@@ -36,7 +36,7 @@ function reserveBook (  ) {
     let bookId = window.localStorage.getItem("bookId");
     let user = JSON.parse(window.sessionStorage.getItem("authInfo"))["user"];
 
-    window.lms.issueService.addNewIssue(bookId,user,fromDate,toDate )
+    reservationSent(window.lms.issueService.addNewIssue(bookId,user,fromDate,toDate ));
 }
 
 
@@ -58,7 +58,8 @@ function rotate (event){
 
 function reservationSent ( issue) {
     let message = `Issue ${issue.ID} was sent to Library`;
-    
+    window.location = "../account/account.html"
+    alert(message);
 }
 
 

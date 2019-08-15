@@ -10,6 +10,7 @@ class IssueService{
     addNewIssue(bookId,user,fromDate,toDate){
         let newIssue = new BookIssue(bookId,user,fromDate,toDate);
         this.PendingIssueStorage.addIntoStorage(newIssue);
+        return newIssue;
     }
 
     /*chenq nayum*/
