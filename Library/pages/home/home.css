@@ -116,7 +116,7 @@ input:hover{
     align-items: center;
     transform: perspective(600px) rotateY(0);
 }
-.login_button, .sign-in_button{
+.login_button, .submit{
     margin-bottom: 10px;
     width: 60%;
     background-color: rgba(0,0,0,.3);
@@ -124,7 +124,7 @@ input:hover{
     transition: transform .2s linear;
     transform: scale(1);
 }
-.login_button:hover, .sign-in_button:hover{
+.login_button:hover, .submit:hover{
     transform: scale(1.05);
     transform-origin: center;
 }
@@ -132,7 +132,7 @@ input:hover{
 .login_button:hover{
     box-shadow: 0 0 10px #821CCB;
 }
-.sign-in_button:hover{
+.submit:hover{
     box-shadow: 0 0 10px #1DACFB;
 }
 

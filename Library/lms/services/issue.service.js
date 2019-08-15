@@ -7,9 +7,8 @@ class IssueService{
         this.BookManager = new BmService();
     }
 
-    addNewIssue(book,user,fromDate,toDate){
-        let newIssue = new BookIssue(book,user,fromDate,toDate);
-        debugger;
+    addNewIssue(bookId,user,fromDate,toDate){
+        let newIssue = new BookIssue(bookId,user,fromDate,toDate);
         this.PendingIssueStorage.addIntoStorage(newIssue);
     }
 
