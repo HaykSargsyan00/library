@@ -1,16 +1,28 @@
-class PermissionService {
-    _permissions = {
-        user: {
-                read:   true,
-                wright: false,
-            },
-        librarian: {
-            read:   true,
-            wright: true
-        }
+class Permissions {
+    permissions = {
+        canManageBook: false,
+        issueBook: false,
+        returnBook: false,
+        acceptIssue: false,
+        refuseIssue: false,
     };
 
-    getPermissions(status) {
-        return this._permissions[status];
+    getPermissions(role) {
+        let permissions = this.permissions;
+        if (role === 'user') {
+            permissions.issueBook = true;
+            permissions.returnBook = true;
+            permissions.issueBook = true;
+            return permissions;
+        }
+        if (role === 'librarian') {
+            permissions.canManageBook = true;
+            permissions.issueBook = true;
+            permissions.returnBook = true;
+            permissions.acceptIssue = true;
+            permissions.refuseIssue = true;
+
+            return permissions;
+        }
     }
 }

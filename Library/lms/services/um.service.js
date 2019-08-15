@@ -9,9 +9,10 @@ class UmService {
             NewUser.password = EncryptionHelper.encrypt(NewUser.password);
             let user = new Human(NewUser);
             this.Storage.addIntoStorage(user);
+            let permissions =  window.lms._permissions.getPermissions(user.status);
             this.sessionStorage.setIntoStorage({
                 user: user,
-                permissions: 'permission'
+                permissions: permissions,
             });
         }
          else {

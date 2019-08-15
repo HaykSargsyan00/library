@@ -4,16 +4,21 @@ let form;
 let cardIsRotated = false;
 let formName = null;
 
+
 window.onload = function(){
+    if( window.sessionStorage.getItem('authInfo') ){
+        window.location = '../account/account.html';
+    }
     window.lms = new LMS();
     card = document.getElementById('card');
     form = document.getElementById('form');
+
     main = document.getElementById('main');
 
     form.addEventListener('keypress',submit);
 
-}
 
+}
 function rotate (event){
     if(event)
     {
@@ -30,9 +35,10 @@ function rotate (event){
         form.innerHTML = '';
         form.removeEventListener('keypress',submit);
     }
-}
 
+}
 window.addFormItems = function addFormItems(eventElement) {
+
     let login = "<span id='error-message' class='error-message'></span>" +
                 "<div class=\"card__form__list\">\n" +
                 "<input type=\"text\" name=\"username\" id=\"username\" placeholder=\"username\" class='shk-input' autocomplete='off'><br>\n" +
@@ -41,7 +47,7 @@ window.addFormItems = function addFormItems(eventElement) {
                 "<div class=\"card__form__list\">\n" +
                 "<input type=\"password\" name=\"password\" id=\"password\" placeholder=\"password\" class='shk-input' autocomplete='off'><br>\n" +
                 "</div>\n" +
-                "<div class=\"card__form__Login_button\" onclick='login()'><span>Login<span></div>";
+                "<div class=\"card__form__Login_button\" onclick='login()'><span>Log in<span></div>";
 
     let signUp = '<span id="error-message" class="error-message"></span>\n' +
                 '<div class="card__form__list">\n' +
@@ -54,9 +60,8 @@ window.addFormItems = function addFormItems(eventElement) {
                 '<div class="card__form__list">\n' +
                 '<input type="email" name="email" id="email" placeholder="example@gmail.com" required class="shk-input" autocomplete=\'off\'><br>\n' +
                 '</div>\n' +
-                '\n' +
-                '<button class="card__form__sign_up_button raised-button" onclick="signUp()">Sign Up</button>\n';
-
+                '<input type="checkbox" id="status">' +
+                '<div class=\"card__form__Login_button\" onclick=\'signUp()\'><span>Sign up<span></div>';
     if(eventElement === 'login'){
         form.insertAdjacentHTML( 'afterbegin' ,login );
         formName = 'login';
@@ -64,9 +69,9 @@ window.addFormItems = function addFormItems(eventElement) {
         form.insertAdjacentHTML( 'afterbegin' ,signUp );
         formName = 'signUp';
     }
+
+
 }
-
-
 function submit(event){
     if( event.key === 'Enter'){
         switch (formName) {
@@ -81,8 +86,8 @@ function submit(event){
                 return;
         }
     }
-}
 
+}
 function login() {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
@@ -126,6 +131,7 @@ function signUp() {
     //newUser.phoneNumber = document.getElementById('phoneNumber').value;
     newUser.username = document.getElementById('username').value;
     newUser.password = document.getElementById('password').value;
+    newUser.status = (document.getElementById('status').checked)?'librarian':'user';
 
     let incorrect = false;
     if( newUser.email.match(/[^0-9,_,\-,@,.,a-z,A-z]/g) != null || newUser.email === '' || newUser.email.indexOf('@')=== -1)

@@ -13,12 +13,11 @@ class AuthService {
             throw new Error(`user with ${username} not found`);
         }
 
+
         if(user.password === EncryptionHelper.encrypt(password)) {
             //let userPermissions = this.permissionService.getPermissions(user.role);
-            this.sessionStorage.setIntoStorage({
-                user: user,
-                permissions: 'permission'
-            });
+            let permissions =  window.lms._permissions.getPermissions(user.status);
+            this.sessionStorage.setIntoStorage( {user: user,permissions: permissions} );
         } else {
             throw new Error(`incorrect username or password`);
         }

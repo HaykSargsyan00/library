@@ -1,5 +1,5 @@
 class Human{
-    constructor({username,password,name,surname,age,email,phoneNumber,status}) {
+    constructor({username,password,name,surname,age,email,phoneNumber,status = 'user'}) {
         this.name = name;
         this.surname = surname;
         this.age = age;

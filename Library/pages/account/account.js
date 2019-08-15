@@ -25,6 +25,8 @@ function getDefaultElementsFromDOM() {
     logoutButton = document.getElementById('logoutButton');
 }
 
+
+
 function createPageStaticComponents() {
     let usernameElements = document.getElementsByClassName('username');
     for(let item of usernameElements){
@@ -40,8 +42,8 @@ function createPageStaticComponents() {
     let mostSearchedBooks = window.lms.bookManagementService.getTopBooks();
     for(let book of mostSearchedBooks){
         let books = `<div class="book">
-                        <img style="height: 100%;width: 100%;" src="${book.url}">
-                        <button onclick="issueBook(' ${book.ID} ')" class="raised-button shk-button">Issue</button>
+                        <img style="height: 100%;width: 100%;" onclick="vewBook('${book.ID}')" src="${book.url}">
+                        <button onclick="issueBook('${book.ID}')">reserve</button>
                     </div>`;
         mostSearchedSection.insertAdjacentHTML( 'afterbegin' ,books );
     }
@@ -51,11 +53,32 @@ function createPageStaticComponents() {
     for(let book of newestBooks){
         let books = `<div class="book">
                         <img style="height: 100%;width: 100%;" src="${book.url}">
-                        <button onclick="issueBook( ${book.ID} )" class="raised-button shk-button">Issue</button>
+                        <button onclick="issueBook(${book.ID})" class="raised-button shk-button">Issue</button>
                     </div>`;
         newestBooksSection.insertAdjacentHTML( 'afterbegin' ,books );
     }
+
+    let navCard = document.getElementById('navCard');
+    let navBar = `<li><button class="shk-button raised-button" onclick="window.location = '../account/account.html'">Home</button></li>
+                  <li><button class="shk-button raised-button" onclick="window.location = '../search/search.html'">Search</button></li>
+                  <li><button class="shk-button raised-button" onclick="window.location = '../history/history.html'">History</button></li>`;
+    let storage = new StorageMService(window.sessionStorage, 'authInfo');
+    let permissions = storage.getFromStorage().permissions;
+    if( permissions.canManageBook === true ) {
+        navBar += `<li><button class="shk-button raised-button" onclick="window.location = '../requests/requests.html'">Requests</button></li>`;
+    }
+
+    if( permissions.canManageBook === false ) {
+        navBar += `<li><button class="shk-button raised-button" onclick="window.location = '../requests/requests.html'">became librarian</button></li>`;
+    }
+
+    navBar += `<li><button class="shk-button raised-button" onclick="logout()">Logout</button></li>`;
+    navCard.innerHTML = `<ul class="button_list"> ${navBar} </ul>`;
 }
+
+
+
+
 
 function switchAccountVisibility() {
     isAccountHidden = !isAccountHidden;
@@ -81,18 +104,30 @@ function logout(){
     window.lms.authService.logout();
 }
 
-names = ["Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron", "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan", "Abbas", "Abdallah", "Abdalroof", "Abdihakim", "Abdirahman", "Abdisalam", "Abdul", "Abdul-Aziz", "Abdulbasir", "Abdulkadir", "Abdulkarem", "Abdulkhader", "Abdullah", "Abdul-Majeed", "Abdulmalik", "Abdul-Rehman", "Abdur", "Abdurraheem", "Abdur-Rahman", "Abdur-Rehmaan", "Abel", "Abhinav", "Abhisumant", "Abid", "Abir", "Abraham", "Abu", "Abubakar", "Ace", "Adain", "Adam", "Adam-James", "Addison", "Addisson", "Adegbola", "Adegbolahan", "Aden", "Adenn", "Adie", "Adil", "Aditya", "Adnan", "Adrian", "Adrien", "Aedan", "Aedin", "Aedyn", "Aeron", "Afonso", "Ahmad", "Ahmed", "Ahmed-Aziz", "Ahoua", "Ahtasham", "Aiadan", "Aidan", "Aiden", "Aiden-Jack", "Aiden-Vee", "Aidian", "Aidy", "Ailin", "Aiman", "Ainsley", "Ainslie", "Airen", "Airidas", "Airlie", "AJ", "Ajay", "A-Jay", "Ajayraj", "Akan", "Akram", "Al", "Ala", "Alan", "Alanas", "Alasdair", "Alastair", "Alber", "Albert", "Albie", "Aldred", "Alec", "Aled", "Aleem", "Aleksandar", "Aleksander", "Aleksandr", "Aleksandrs", "Alekzander", "Alessandro", "Alessio", "Alex", "Alexander", "Alexei", "Alexx", "Alexzander", "Alf", "Alfee", "Alfie", "Alfred", "Alfy", "Alhaji", "Al-Hassan", "Ali", "Aliekber", "Alieu", "Alihaider", "Alisdair", "Alishan", "Alistair", "Alistar", "Alister", "Aliyaan", "Allan", "Allan-Laiton", "Allen", "Allesandro", "Allister", "Ally", "Alphonse", "Altyiab", "Alum", "Alvern", "Alvin", "Alyas", "Amaan", "Aman", "Amani", "Ambanimoh", "Ameer", "Amgad", "Ami", "Amin", "Amir", "Ammaar", "Ammar", "Ammer", "Amolpreet", "Amos", "Amrinder", "Amrit", "Amro", "Anay", "Andrea", "Andreas", "Andrei", "Andrejs", "Andrew", "Andy", "Anees", "Anesu", "Angel", "Angelo", "Angus", "Anir", "Anis", "Anish", "Anmolpreet", "Annan", "Anndra", "Anselm", "Anthony", "Anthony-John", "Antoine", "Anton", "Antoni", "Antonio", "Antony", "Antonyo", "Anubhav", "Aodhan", "Aon", "Aonghus", "Apisai", "Arafat", "Aran", "Arandeep", "Arann", "Aray", "Arayan", "Archibald", "Archie", "Arda", "Ardal", "Ardeshir", "Areeb", "Areez", "Aref", "Arfin", "Argyle", "Argyll", "Ari", "Aria", "Arian", "Arihant", "Aristomenis", "Aristotelis", "Arjuna", "Arlo", "Armaan", "Arman", "Armen", "Arnab", "Arnav", "Arnold", "Aron", "Aronas", "Arran", "Arrham", "Arron", "Arryn", "Arsalan", "Artem", "Arthur", "Artur", "Arturo", "Arun", "Arunas", "Arved", "Arya", "Aryan", "Aryankhan", "Aryian", "Aryn", "Asa", "Asfhan", "Ash", "Ashlee-jay", "Ashley", "Ashton", "Ashton-Lloyd", "Ashtyn", "Ashwin", "Asif", "Asim", "Aslam", "Asrar", "Ata", "Atal", "Atapattu", "Ateeq", "Athol", "Athon", "Athos-Carlos", "Atli", "Atom", "Attila", "Aulay", "Aun", "Austen", "Austin", "Avani", "Averon", "Avi", "Avinash", "Avraham", "Awais", "Awwal", "Axel", "Ayaan", "Ayan", "Aydan", "Ayden", "Aydin", "Aydon", "Ayman", "Ayomide", "Ayren", "Ayrton", "Aytug", "Ayub", "Ayyub", "Azaan", "Azedine", "Azeem", "Azim", "Aziz", "Azlan", "Azzam", "Azzedine", "Babatunmise", "Babur", "Bader", "Badr", "Badsha", "Bailee", "Bailey", "Bailie", "Bailley", "Baillie", "Baley", "Balian", "Banan"];
+function searching(event) {
+    let searchBar = document.getElementById('search');
+    if(event.target === searchBar) {
+        document.getElementById('mainBefore').classList.add('main-before');
+    }
+    if(event.target === document.getElementById('mainBefore')){
+        searchBar.value = '';
+        let resultList = document.querySelector(".result").innerHTML = '';
+        document.getElementById('mainBefore').classList.remove('main-before');
+    }
+}
+
 function updateResult(query) {
     let resultList = document.querySelector(".result");
     resultList.innerHTML = "";
+    let books = lms.bookManagementService.getBooksByName(query);
+    for(let i = 0; i < 10 && i<books.length; i++){
+        resultList.innerHTML += `<li class="list-group-item" onclick="vewBook(' ${books[i].ID} ')"><span>${books[i].name} </span> <span> ${books[i].author} </span></li>`;
+    };
+}
 
-    names.map(function(algo){
-        query.split(" ").map(function (word){
-            if(algo.toLowerCase().indexOf(word.toLowerCase()) != -1){
-                resultList.innerHTML += `<li class="list-group-item">${algo}</li>`;
-            }
-        })
-    })
+function vewBook(bookId) {
+    window.localStorage.setItem('bookId',bookId);
+    window.location = '../book/book.html';
 }
 
 function issueBook(bookId){

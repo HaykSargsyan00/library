@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Accaunt</title>
     <link type="text/css" rel="stylesheet" href="account.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <script src="../../Exceptions/Exceptions.js"></script>
 
     <script src="../../lms/services/um.service.js"></script>
@@ -14,15 +13,19 @@
     <script src="../../lms/services/store.service.js"></script>
     <script src="../../lms/services/bm.service.js"></script>
 
+
     <script src="../../lms/encryption.helper.js"></script>
     <script src="../../lms/lms.js"></script>
     <script src="../../lms/model/objects.js"></script>
     <script src="../../lms/model/issue.js"></script>
     <script src="../../lms/model/book.js"></script>
+    <script src="../../lms/model/permissions.js"></script>
+
+
     <script src="account.js"></script>
 </head>
 <body>
-    <div class="main">
+    <div class="main" id='mainBefore' onclick="searching(event)">
         <div class="header header--mini" id = 'header' >
             <div class = "account">
                 <div class="header-card header-card--hide" id="card">
@@ -35,13 +38,8 @@
                             <span class="userID">#12348</span>
                         </div>
                     </div>
-                    <div class="header-card-back">
-                        <ul class="button_list">
-                            <li><button class="shk-button raised-button" onclick="window.location = '../account/account.html'">Home</button></li>
-                            <li><button class="shk-button raised-button">Search</button></li>
-                            <li><button class="shk-button raised-button">History</button></li>
-                            <li><button class="shk-button raised-button" onclick="logout()">Logout</button></li>
-                        </ul>
+                    <div class="header-card-back" id="navCard">
+
                     </div>
                 </div>
 
@@ -57,18 +55,12 @@
             <button class="shk-button raised-button logout_button logout_button--show" id="logoutButton" onclick="logout()">Log out</button>
         </div>
 
-        <div class ="content search">
-            <div class="container">
-                <div class="col-xs-8 col-xs-offset-2">
-                    <div class="input-group">
-                        <input oninput="updateResult(this.value)" type="search" class="form-control" placeholder="Search..." />
-                    </div>
-                </div>
-
-                <div class="container">
+        <div class ="search">
+            <div class="search-container">
+                <input oninput="updateResult(this.value)" type="search" class="form-control search__input" id="search" placeholder="Search..." />
+                <div class="search__result">
                     <ul class="list-group result"></ul>
                 </div>
-
             </div>
         </div>
 
@@ -76,7 +68,7 @@
             <div class="main-content__section">
                 <div class ="most-searched_Header">
                     <h1 class="main-content__header">Most Searched</h1>
-                    <hr>
+                    <div style="width: 100%; opacity: 0.6; height: 3px;background: linear-gradient(45deg,#2497EA 20%,#821CCB 80%);"></div>
                 </div>
 
                 <div class="main-content__books_section" id="most-searched__books">
@@ -86,7 +78,8 @@
             <div class="main-content__section">
                 <div class ="most-searched-header">
                     <h1 class="main-content__header">Newest Books</h1>
-                    <hr>
+                    <div style="width: 100%; opacity: 0.6 ;height: 3px;background: linear-gradient(45deg,#2497EA 20%,#821CCB 80%);"></div>
+
                 </div>
                 <div class="main-content__books_section" id="newestBooks">
                     <button class="shk-button raised-button more_books_button">more..</button>

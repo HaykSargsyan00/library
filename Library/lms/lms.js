@@ -1,11 +1,15 @@
 class LMS {
 
     constructor() {
-        this._authService = new AuthService(new UmService(), new PermissionService());
+        this._authService = new AuthService(new UmService());
         this._bookManagementService = new BmService();
         this._issueService = new IssueService();
+        this._permissions = new Permissions();
     }
 
+    get permissions() {
+        return this._permissions;
+    }
     get authService() {
         return this._authService;
     }

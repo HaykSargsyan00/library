@@ -108,14 +108,10 @@ class BmService{
     getBooksByName(bookName){
         let booksWithThisName = [];
         for(let book of this.books){
-            if(book.name === bookName){
+            if( book.name.toLowerCase().indexOf( bookName.toLowerCase() ) !== -1 ){
                 booksWithThisName.push(book);
             }
         }
-        if(booksWithThisName.length === 0){
-            throw new Error('There are no book whit such name');
-        }
-
         return booksWithThisName;
     }
 
