@@ -52,8 +52,8 @@ function createPageStaticComponents() {
     let newestBooks = window.lms.bookManagementService.getNewBooks();
     for(let book of newestBooks){
         let books = `<div class="book">
-                        <img style="height: 100%;width: 100%;" src="${book.url}">
-                        <button onclick="issueBook(${book.ID})" class="raised-button shk-button">Issue</button>
+                        <img style="height: 100%;width: 100%;" onclick="vewBook('${book.ID}')" src="${book.url}">
+                        <button onclick="issueBook(${book.ID})">reserve</button>
                     </div>`;
         newestBooksSection.insertAdjacentHTML( 'afterbegin' ,books );
     }
@@ -119,6 +119,11 @@ function searching(event) {
 function updateResult(query) {
     let resultList = document.querySelector(".result");
     resultList.innerHTML = "";
+
+    if(query === ''){
+        return;
+    }
+
     let books = lms.bookManagementService.getBooksByName(query);
     for(let i = 0; i < 10 && i<books.length; i++){
         resultList.innerHTML += `<li class="list-group-item" onclick="vewBook(' ${books[i].ID} ')"><span>${books[i].name} </span> <span> ${books[i].author} </span></li>`;

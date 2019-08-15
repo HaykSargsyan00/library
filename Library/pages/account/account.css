@@ -361,7 +361,7 @@ a{
 }
 .book>button{
     position: absolute;
-    bottom: 10px;
+    bottom: 12px;
     opacity: 0;
     transition: all .2s linear;
     width: 60px;
@@ -370,7 +370,7 @@ a{
     color: white;
     font-weight: normal;
     background: none;
-    left: 50%;
+    left: 47%;
     border: none;
     transform: translateX(-50%) scale(1);
     cursor: pointer;
