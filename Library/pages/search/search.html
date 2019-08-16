@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link type="text/css" rel="stylesheet" href="book.css">
+    <title>Accaunt</title>
+    <link type="text/css" rel="stylesheet" href="search.css">
     <script src="../../Exceptions/Exceptions.js"></script>
 
     <script src="../../lms/services/um.service.js"></script>
@@ -22,9 +22,10 @@
     <script src="../../lms/model/permissions.js"></script>
 
 
-    <script src="book.js"></script>
+    <script src="search.js"></script>
 </head>
 <body>
+<div class="main" id='mainBefore' onclick="searching(event)">
     <div class="header header--mini" id = 'header' >
         <div class = "account">
             <div class="header-card header-card--hide" id="card">
@@ -53,19 +54,18 @@
         </div>
         <button class="shk-button raised-button logout_button logout_button--show" id="logoutButton" onclick="logout()">Log out</button>
     </div>
-    <div class="content">
-        <div class="book">
-            <div class="content-view" id="content-view">
-            </div>
-            <div class="book_info">
-                <div><span>name</span></div>
-                <div><span>author</span></div>
-                <div><span>country</span></div>
-                <div><span>language</span></div>
-                <div><span>pages count</span></div>
-                <div><span>date</span></div>
-            </div>
+
+    <div class ="search">
+        <div class="search-container">
+            <input oninput="updateResult(this.value)" type="search" class="form-control search__input" id="search" placeholder="Search..." />
         </div>
     </div>
+
+    <div class="main-content">
+        <div class="search__result result">
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
