@@ -11,7 +11,7 @@ window.onload = function(){
     form = document.getElementById('form');
     main = document.getElementById('main');
     book = bms.getBookById(window.localStorage.getItem(spaceIgnor("bookId")));
-    f();
+    createCard();
 
 }
 function spaceIgnor (str) {
@@ -23,7 +23,7 @@ function spaceIgnor (str) {
     }
     return newStr;
 }
-function f (  ) {
+function createCard (  ) {
     let img = document.createElement("img");
     img.src = book.url;
     img.style.height = "100%";
@@ -62,5 +62,7 @@ function reservationSent ( issue) {
     alert(message);
 }
 
-
+function back (  ) {
+    window.location = "../Book/book.html";
+}
 

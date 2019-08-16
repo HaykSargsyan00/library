@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accaunt</title>
+    <link type="text/css" rel="stylesheet" href="reservationStyles.css">
+    <script src="../../Exceptions/Exceptions.js"></script>
+
+    <script src="../../lms/services/um.service.js"></script>
+    <script src="../../lms/services/permission.service.js"></script>
+    <script src="../../lms/services/auth.service.js"></script>
+    <script src="../../lms/services/issue.service.js"></script>
+    <script src="../../lms/services/store.service.js"></script>
+    <script src="../../lms/services/bm.service.js"></script>
+
+
+    <script src="../../lms/encryption.helper.js"></script>
+    <script src="../../lms/lms.js"></script>
+    <script src="../../lms/model/objects.js"></script>
+    <script src="../../lms/model/issue.js"></script>
+    <script src="../../lms/model/book.js"></script>
+    <script src="../../lms/model/permissions.js"></script>
+
+
+    <script src="reservations.js"></script>
+</head>
+<body>
+<div class="main" id='mainBefore' onclick="searching(event)">
+    <div class="header header--mini" id = 'header' >
+        <div class = "account">
+            <div class="header-card header-card--hide" id="card">
+                <div class="header-card-front">
+                    <div class="header-card__picture">
+                        <img src="https://image.flaticon.com/icons/png/512/23/23716.png">
+                    </div>
+                    <div class="header-card__text">
+                        <h1 class="username"></h1>
+                        <span class="userID">#12348</span>
+                    </div>
+                </div>
+                <div class="header-card-back" id="navCard">
+
+                </div>
+            </div>
+
+            <button class="shk-button raised-button account_hide_button" id="accountHideButton" onclick="switchAccountVisibility()">
+                UP
+            </button>
+        </div>
+
+        <div class="header-mini_card header-mini_card--show" id="headerMiniCard" onclick="switchAccountVisibility()">
+            <img src="http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png">
+            <span class="username"></span>
+        </div>
+        <button class="shk-button raised-button logout_button logout_button--show" id="logoutButton" onclick="logout()">Log out</button>
+    </div>
+
+
+
+    <div class="main-content">
+
+    </div>
+</div>
+
+</body>
+</html>
