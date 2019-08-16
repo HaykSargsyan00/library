@@ -88,6 +88,7 @@ function logout(){
 }
 
 function ReservaionTable (  ) {
+    pendingIssues  = lms._issueService.getAllPendingIssues();
     let html = ``;
     let tbody = window.document.getElementById("tbody");
     for (let i = 0; i <pendingIssues.length ; i++) {
