@@ -1,3 +1,8 @@
+.arrow-up{
+    font-size: 10px;
+    text-align: center;
+}
+
 .incorrect-input{
     box-shadow: 0 0 20px #f00;
 }
