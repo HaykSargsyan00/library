@@ -65,7 +65,7 @@ class IssueService{
 
     }
 
-    rejectIssue(issue){
+    rejectIssue(issueId){
 
 
         let pendingArr = this.PendingIssueStorage.getFromStorage();
