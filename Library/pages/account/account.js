@@ -65,7 +65,7 @@ function createPageStaticComponents() {
     let storage = new StorageMService(window.sessionStorage, 'authInfo');
     let permissions = storage.getFromStorage().permissions;
     if( permissions.canManageBook === true ) {
-        navBar += `<li><button class="shk-button raised-button" onclick="window.location = '../requests/requests.html'">Requests</button></li>`;
+        navBar += `<li><button class="shk-button raised-button" onclick="window.location = '../reservations/reservations.html'">Requests</button></li>`;
     }
 
     if( permissions.canManageBook === false ) {

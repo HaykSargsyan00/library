@@ -15,6 +15,7 @@ window.onload = function(){
     pendingIssues  = lms._issueService.getAllPendingIssues();
     getDefaultElementsFromDOM();
     createPageStaticComponents();
+    ReservaionTable();
 
 };
 
@@ -39,25 +40,6 @@ function createPageStaticComponents() {
         item.innerText = thisUser.ID;
     }
 
-    let mostSearchedSection = document.getElementById('most-searched__books');
-    let mostSearchedBooks = window.lms.bookManagementService.getTopBooks();
-    for(let book of mostSearchedBooks){
-        let books = `<div class="book">
-                        <img style="height: 100%;width: 100%;" onclick="vewBook('${book.ID}')" src="${book.url}">
-                        <button onclick="issueBook('${book.ID}')">reserve</button>
-                    </div>`;
-        mostSearchedSection.insertAdjacentHTML( 'afterbegin' ,books );
-    }
-
-    let newestBooksSection = document.getElementById('newestBooks');
-    let newestBooks = window.lms.bookManagementService.getNewBooks();
-    for(let book of newestBooks){
-        let books = `<div class="book">
-                        <img style="height: 100%;width: 100%;" onclick="vewBook('${book.ID}')" src="${book.url}">
-                        <button onclick="issueBook(${book.ID})">reserve</button>
-                    </div>`;
-        newestBooksSection.insertAdjacentHTML( 'afterbegin' ,books );
-    }
 
     let navCard = document.getElementById('navCard');
     let navBar = `<li><button class="shk-button raised-button" onclick="window.location = '../../Library/pages/account/account.html'">Home</button></li>
@@ -106,5 +88,19 @@ function logout(){
 }
 
 function ReservaionTable (  ) {
+    let html = ``;
+    let tbody = window.document.getElementById("tbody");
+    for (let i = 0; i <pendingIssues.length ; i++) {
+        html+= `<tr><td>${pendingIssues[i].ID} </td> <td> ${pendingIssues[i].username} </td><td> ${pendingIssues[i].bookId}</td> <td> ${pendingIssues[i].fromDate} </td> <td>${pendingIssues[i].toDate} </td> <td> <button onclick="accept('${pendingIssues[i].ID}')" > + </button></button> </td><td><button onclick="deny('${pendingIssues[i].ID}')"> - </button></td></tr>`;
+    }
 
+    tbody.innerHTML = html;
+}
+function accept ( issue ) {
+    window.lms.issueService.acceptIssue(issue);
+    ReservaionTable();
+}
+function deny (issue  ) {
+    window.lms.issueService.rejectIssue(issue);
+    ReservaionTable();
 }

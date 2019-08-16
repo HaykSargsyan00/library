@@ -25,7 +25,7 @@
     <script src="reservations.js"></script>
 </head>
 <body>
-<div class="main" id='mainBefore' onclick="searching(event)">
+<div class="main" id='mainBefore' >
     <div class="header header--mini" id = 'header' >
         <div class = "account">
             <div class="header-card header-card--hide" id="card">
@@ -44,7 +44,7 @@
             </div>
 
             <button class="shk-button raised-button account_hide_button" id="accountHideButton" onclick="switchAccountVisibility()">
-                <span class= "arrow-up">^</span>
+                UP
             </button>
         </div>
 
@@ -58,7 +58,38 @@
 
 
     <div class="main-content">
+        <table class="table" id="table">
+            <thead>
+            <tr>
+                <td>
+                    Id
+                </td>
+                <td>
+                    Username
 
+                </td>
+                <td>
+                    BookId
+                </td>
+
+                <td>
+                    from
+                </td>
+                <td>
+                    to
+                </td>
+                <td>
+                    ac
+                </td>
+                <td>
+                    tej
+                </td>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
     </div>
 </div>
 

@@ -53,7 +53,7 @@ class IssueService{
         let pendingArr = this.PendingIssueStorage.getFromStorage();
 
         for (let i = 0; i < pendingArr.length; i++) {
-            if(pendingArr[i].Id===issueId)
+            if(pendingArr[i].ID===issueId)
             {
                 this.AcceptedIssuStorage.addIntoStorage(pendingArr[i]);
                 pendingArr[i]=pendingArr[pendingArr.length-1];
@@ -71,7 +71,7 @@ class IssueService{
         let pendingArr = this.PendingIssueStorage.getFromStorage();
 
         for (let i = 0; i < pendingArr.length; i++) {
-            if(pendingArr[i].Id===issueId)
+            if(pendingArr[i].ID===issueId)
             {
                 this.RejectedIssuStorage.addIntoStorage(pendingArr[i]);
                 pendingArr[i]=pendingArr[pendingArr.length-1];
