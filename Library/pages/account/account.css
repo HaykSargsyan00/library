@@ -40,6 +40,11 @@
     box-shadow: 0 0 10px #1DACFB;
 }
 
+.arrow-up{
+    font-size: 10px;
+    text-align: center;
+}
+
 input:hover{
     cursor: pointer;
 }
